@@ -1,0 +1,35 @@
+.navbar {
+  z-index: 999;
+  align-items: center;
+  box-shadow: 0 1px 15px rgba(0, 0, 0, 0.2);
+  background: white;
+  display: flex;
+  gap: 8px;
+  height: 52px;
+  padding: 0 8px;
+  position: sticky;
+  top: 0;
+
+  img {
+    width: 149px;
+  }
+
+  span {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #212121;
+  }
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 999;
+  box-shadow: 0 1px 15px rgba(0, 0, 0, 0.2);
+  background: #ececec;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+}

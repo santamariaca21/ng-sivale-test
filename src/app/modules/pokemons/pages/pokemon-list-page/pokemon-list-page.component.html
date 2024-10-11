@@ -1,0 +1,12 @@
+<section>
+  <div class="row">
+    <div class="col-12 col-md-3" *ngFor="let pokemon of pokemonList">
+      <div class="card m-2" (click)="selectedPokemon = pokemon.index">
+        <img src="https://img.pokemondb.net/artwork/{{pokemon.name}}.jpg"/>
+      </div>
+      <h4 class="ml-2 mt-0">{{ pokemon.index | number :'3.0' }} {{ pokemon.name | titlecase }}</h4>
+    </div>
+  </div>
+</section>
+
+<app-pokemon-detail-page *ngIf="selectedPokemon" [pokemonId]="selectedPokemon" (close)="selectedPokemon = null"></app-pokemon-detail-page>

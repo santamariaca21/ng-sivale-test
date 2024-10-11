@@ -1,0 +1,55 @@
+<section class="row pokemon-detail-container" *ngIf="pokemon">
+  <button class="close-button" (click)="close.next()">
+  </button>
+  <div class="col-12 col-md-4">
+    <div class="pokemon-sprites">
+      <h3 class="mb-1">{{ pokemon.id | number : '3.0' }} | {{ pokemon.name | titlecase }}</h3>
+      <div>
+        <img class="sprite-preview" [src]="sprites[currentSprite]" alt="current sprite url">
+      </div>
+      <div class="sprites-container row">
+        <ng-container *ngFor="let sprite of sprites; index as i">
+          <div class="sprite-item" (click)="currentSprite = i" [class.current-sprite]="i === currentSprite">
+            <img [src]="sprite" alt="pokemon sprite url"/>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-md-8">
+    <p [innerHTML]="flavorText"></p>
+    <h4>Tipo(s)</h4>
+    <div class="row types-container mb-3">
+
+      <ng-container *ngFor="let type of pokemon.types">
+        <small class="mr-2 px-3 py-2">
+          <img
+            src="https://raw.githubusercontent.com/PokeMiners/pogo_assets/master/Images/Types/POKEMON_TYPE_{{type.type.name | uppercase}}.png"
+            class="mr-2"
+            alt="pokemon type icon">
+          {{ type.type.name | titlecase }}
+        </small>
+      </ng-container>
+    </div>
+
+    <ng-container *ngFor="let stat of pokemon.stats">
+      <div class="stats-container">
+        <span class="mb-1"><strong>{{ statNames[stat.stat.name] }}:</strong> {{ stat.base_stat }}</span>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="evolves.length > 1">
+      <h3>Evoluciones</h3>
+
+      <div class="row">
+        <ng-container *ngFor="let evolve of evolves">
+          <div class="card m-2" (click)="getPokemon(evolve.index)">
+            <img
+              width="100px"
+              src="https://img.pokemondb.net/artwork/{{evolve.name}}.jpg"/>
+          </div>
+        </ng-container>
+      </div>
+    </ng-container>
+  </div>
+</section>
