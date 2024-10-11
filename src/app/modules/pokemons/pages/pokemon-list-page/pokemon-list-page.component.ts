@@ -16,6 +16,8 @@ export class PokemonListPageComponent implements OnInit {
 
   private _loading = false;
 
+  private complete = false;
+
   @HostListener("window:scroll", [])
   onScroll(): void {
     if (!this._loading && (window.innerHeight + window.scrollY + 100) >= document.body.offsetHeight) {
@@ -33,12 +35,16 @@ export class PokemonListPageComponent implements OnInit {
   }
 
   nextPage(): void {
+    if (this.complete) {
+      return;
+    }
     this._loading = true;
     this._pokemonService.getNextPokemonPage(this.nextPageUrl)
       .subscribe({
         next: response => {
           this.pokemonList = this.pokemonList.concat(response.results);
           this.nextPageUrl = response.next;
+          this.complete =  !response.next;
         },
         complete: () => this._loading = false
       });
